@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block content %}
+{% load static %}
+
+<div class="d-flex justify-content-center my-5 row gx-0 overflow-hidden">
+  <div class="d-flex bg-white shadow p-5 flex-column col-lg-3 col-12">
+    <div class="fs-2 font-medium text-center mb-5">Регистрация</div>
+    <form class="d-flex gap-4 flex-column" method="post" action="{% url 'register' %}">
+      {% csrf_token %} {% for field in form %}
+
+      <div class="d-flex gap-2 flex-column">
+        {{ field.label_tag }} {{ field }} {% if field.errors %}
+        <div class="d-flex text-danger flex-column gap-1">
+          {% for error in field.errors %}
+          <div>{{error}}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %} {% if form.errors %}
+      <div class="d-flex text-danger flex-column gap-1">
+        {% for error in field.errors %}
+        <div>{{error}}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <button type="submit" class="btn btn-lg btn-danger rounded-pill">Зарегистрироваться</button>
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  </div>
+  <div class="col-lg-6 col-12 p-0">
+    <img class="img-fluid" src="{% static 'images/bpoo.chrge.ru_.png' %}" alt="">
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+.nav-item:hover {
+    background-color: rgb(180, 180, 180) !important;
+    transition: .2s;
+}
+
+.nav-item {
+    transition: .2s;
+}
+
+.d-flex input, .d-flex textarea {
+    width: 100% !important;
+}
+label {
+    text-wrap: nowrap;
+}
+
+.nameBanner::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    border-bottom: 2px solid;
+}
+
+.col-4 img {
+    transform: translateY(250%);
+    animation: ani 1s ease-out forwards;
+}
+
+.img-fluid {
+    transform: translateX(200%);
+    animation: aniX 1s ease-out forwards;
+
+}
+
+@keyframes ani {
+    0% {transform: translateY(200%);}
+    100% {transform: translateY(0);}
+  }
+
+@keyframes aniX {
+    0% {transform: translateX(200%);}
+    100% {transform: translateX(0);}
+}

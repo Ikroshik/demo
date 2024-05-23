@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="mb-5">
+  <div class="text-center mb-5 bg-white py-3">
+    <h1 class="">Мои заявления</h1>
+    <a
+      href="{% url 'new_statement' %}"
+      class="btn btn-danger btn-lg d-inline-block rounded-pill"
+      >Новое заявление</a
+    >
+  </div>
+  <div class="row gap-4 justify-content-around container mx-auto">
+    {% for statement in statements %}
+    <article class="bg-body-secondary flex-column d-flex col-3 gap-2 p-5 rounded">
+      <div class="fs-2 fw-bold">Заявка №{{ statement.pk }}</div>
+      <div>
+        <div class="fw-bold">Государственный регистрационный номер</div>
+        <div>{{ statement.car_registration_number }}</div>
+      </div>
+      <div>
+        <div class="fw-bold">Описание</div>
+        <div>{{ statement.description }}</div>
+      </div>
+      <div>
+        <div class="fw-bold">Дата и время</div>
+        <div>{{ statement.date_time }}</div>
+      </div>
+      <div class="">
+        <div class="fw-bold">Статус</div>
+        
+          {% if statement.get_status_display == 'Подтверждено' %}
+          <div class="btn btn-success disabled">
+          {{ statement.get_status_display }}
+          </div>
+          {% elif statement.get_status_display == 'Отклонено' %}
+          <div class="btn btn-danger disabled">
+          {{ statement.get_status_display }}
+          </div>
+          {% else %}
+          <div class="btn btn-warning disabled">
+          {{ statement.get_status_display }}
+          </div>
+          {% endif %}
+
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

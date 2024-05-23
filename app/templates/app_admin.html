@@ -1,0 +1,74 @@
+{% extends "base.html" %} {% block content %}
+<div class="mb-5">
+  <div class="text-center mb-5 bg-white py-3">
+    <h1 class="">Панель администратора</h1>
+  </div>
+  <div class="row gap-4 justify-content-around container mx-auto">
+    {% for statement in statements %}
+    <article class="bg-body-secondary flex-column d-flex col-3 gap-2 p-5 rounded">
+      <div class="fs-2 fw-bold">Заявка №{{ statement.pk }}</div>
+      <div>
+        <div class="fw-bold">ФИО подавшего</div>
+        <div>{{ statement.reporter.full_name }}</div>
+      </div>
+      <div>
+        <div class="fw-bold">Государственный регистрационный номер</div>
+        <div>{{ statement.car_registration_number }}</div>
+      </div>
+      <div>
+        <div class="fw-bold">Описание</div>
+        <div>{{ statement.description }}</div>
+      </div>
+      <div>
+        <div class="fw-bold">Дата и время</div>
+        <div>{{ statement.date_time }}</div>
+      </div>
+      <div class="">
+        <div class="fw-bold">Статус</div>
+        
+          {% if statement.get_status_display == 'Подтверждено' %}
+          <div class="btn btn-success disabled">
+          {{ statement.get_status_display }}
+          </div>
+          {% elif statement.get_status_display == 'Отклонено' %}
+          <div class="btn btn-danger disabled">
+          {{ statement.get_status_display }}
+          </div>
+          {% else %}
+          <div class="btn btn-warning disabled">
+          {{ statement.get_status_display }}
+          </div>
+          {% endif %}
+
+      </div>
+      {% if statement.status == "N" %}
+      <div class="d-flex gap-2">
+        <form method="post" action="">
+          {% csrf_token %}
+          <input type="hidden" name="statement_id" value="{{ statement.id }}" />
+          <input type="hidden" name="{{ form.status.name }}" value="A" />
+          <button
+            type="submit"
+            class="btn btn-success"
+          >
+            Подтвердить
+          </button>
+        </form>
+        <form method="post" action="">
+          {% csrf_token %}
+          <input type="hidden" name="statement_id" value="{{ statement.id }}" />
+          <input type="hidden" name="{{ form.status.name }}" value="R" />
+          <button
+            type="submit"
+            class="btn btn-danger"
+          >
+            Отклонить
+          </button>
+        </form>
+      </div>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row" style="overflow: hidden;">     
+        <div class="col-8 align-self-end mb-5" style="z-index: 9999;">
+            <div class="nameBanner position-relative"><h1 style="font-size: 4rem;">Текст текст</h1></div>
+            <p class="fs-4">Текст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текст</p>            
+            {% if user.is_authenticated %}
+            <a href="{% url 'statements' %}" class="btn btn-lg btn-danger w-50 rounded-pill" type="button">Написать заявление</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-lg btn-danger w-50 rounded-pill">Войти</a>
+            {% endif %}
+        </div>
+        <div class="col-4">
+            <img src="{% static 'images/belyashboss.png' %}" width="100%" alt="img">
+        </div>
+    </div>
+</div>
+<div class="bg-white">
+    <div class="container text-center py-5">
+        <h2 class="pb-4">Почему мы</h2>
+        <p>Мы компания Текст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текст</p>
+    </div>
+</div>
+<div>
+    <div class="container text-center py-5">
+        <h2 class="pb-4">Почему мы</h2>
+        <p>Мы компания Текст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текстТекст текст</p>
+    </div>
+</div>
+{% endblock %}
